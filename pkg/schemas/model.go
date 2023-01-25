@@ -2,7 +2,7 @@
 //
 // Code borrowed from https://github.com/alecthomas/jsonschema/
 //
-// Copyright (C) 2014 Alec Thomas
+// # Copyright (C) 2014 Alec Thomas
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
@@ -110,7 +110,7 @@ type Type struct {
 	Required             []string         `json:"required,omitempty"`             // section 5.15
 	Properties           map[string]*Type `json:"properties,omitempty"`           // section 5.16
 	PatternProperties    map[string]*Type `json:"patternProperties,omitempty"`    // section 5.17
-	AdditionalProperties *Type            `json:"additionalProperties,omitempty"` // section 5.18
+	AdditionalProperties *interface{}     `json:"additionalProperties,omitempty"` // section 5.18
 	Dependencies         map[string]*Type `json:"dependencies,omitempty"`         // section 5.19
 	Enum                 []interface{}    `json:"enum,omitempty"`                 // section 5.20
 	Type                 TypeList         `json:"type,omitempty"`                 // section 5.21
