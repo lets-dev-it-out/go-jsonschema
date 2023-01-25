@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/atombender/go-jsonschema/pkg/generator"
+	"github.com/lets-dev-it-out/go-jsonschema/pkg/generator"
 )
 
 var basicConfig = generator.Config{

@@ -9,8 +9,8 @@ This tool generates Go data types and structs that corresponds to definitions in
 * **From source**: Go 1.11 or later, with Go modules enabled, is advisable in order to get the right dependencies. To install:
 
 ```shell
-$ go get github.com/atombender/go-jsonschema/...
-$ go install github.com/atombender/go-jsonschema/cmd/gojsonschema@latest
+$ go get github.com/lets-dev-it-out/go-jsonschema/...
+$ go install github.com/lets-dev-it-out/go-jsonschema/cmd/gojsonschema@latest
 ```
 
 ## Usage
