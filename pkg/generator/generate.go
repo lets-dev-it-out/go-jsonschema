@@ -600,7 +600,8 @@ func (g *schemaGenerator) generateStructType(
 		_, ok := (*t.AdditionalProperties).(bool)
 		if !ok && t.AdditionalProperties != nil {
 			casted := (*t.AdditionalProperties).(*schemas.Type)
-			if valueType, err = g.generateType(casted, nil); err != nil {
+			valueType, err = g.generateType(casted, nil); 
+			if err != nil {
 				return nil, err
 			}
 		}
