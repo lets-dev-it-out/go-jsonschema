@@ -597,7 +597,8 @@ func (g *schemaGenerator) generateStructType(
 		}
 		valueType := codegen.Type(codegen.EmptyInterfaceType{})
 		var err error
-		if b, ok := (*t.AdditionalProperties).(bool); t.AdditionalProperties != nil && (!b || ok) {
+		_, ok := (*t.AdditionalProperties).(bool)
+		if !ok && t.AdditionalProperties != nil {
 			casted := (*t.AdditionalProperties).(*schemas.Type)
 			if valueType, err = g.generateType(casted, nil); err != nil {
 				return nil, err
