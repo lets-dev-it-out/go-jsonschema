@@ -599,8 +599,11 @@ func (g *schemaGenerator) generateStructType(
 		valueType := codegen.Type(codegen.EmptyInterfaceType{})
 
 		if t.AdditionalProperties != nil {
-			_, ok := (*t.AdditionalProperties).(bool)
-			if !ok {
+			switch (*t.AdditionalProperties).(type) {
+			case bool:
+				// If additionalProperties is a boolean, then it's a map of empty interfaces
+				break
+			default:
 				jsonData, err := json.Marshal(t.AdditionalProperties)
 				if err != nil {
 					return nil, err
