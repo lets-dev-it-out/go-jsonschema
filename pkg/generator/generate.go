@@ -600,10 +600,7 @@ func (g *schemaGenerator) generateStructType(
 
 		if t.AdditionalProperties != nil {
 			switch (*t.AdditionalProperties).(type) {
-			case bool:
-				// If additionalProperties is a boolean, then it's a map of empty interfaces
-				break
-			default:
+			case map[string]interface{}:
 				jsonData, err := json.Marshal(t.AdditionalProperties)
 				if err != nil {
 					return nil, err
@@ -617,6 +614,8 @@ func (g *schemaGenerator) generateStructType(
 				if err != nil {
 					return nil, err
 				}
+			default:
+				break
 			}
 		}
 		return &codegen.MapType{
