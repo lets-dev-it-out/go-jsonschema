@@ -600,7 +600,7 @@ func (g *schemaGenerator) generateStructType(
 
 		if t.AdditionalProperties != nil {
 			_, ok := (*t.AdditionalProperties).(bool)
-			if !ok && t.AdditionalProperties != nil {
+			if !ok {
 				jsonData, err := json.Marshal(t.AdditionalProperties)
 				if err != nil {
 					return nil, err
