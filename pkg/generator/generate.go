@@ -614,8 +614,10 @@ func (g *schemaGenerator) generateStructType(
 				if err != nil {
 					return nil, err
 				}
-			default:
+			case bool:
 				break
+			default:
+				return nil, errors.Errorf("unknown type of field additionalProperties: %T", t.AdditionalProperties)
 			}
 		}
 		return &codegen.MapType{
