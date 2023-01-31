@@ -1,6 +1,7 @@
 package generator
 
 import (
+	"encoding/json"
 	"fmt"
 	"go/format"
 	"os"
@@ -596,13 +597,27 @@ func (g *schemaGenerator) generateStructType(
 				"skipping validation code for them since we don't know their types")
 		}
 		valueType := codegen.Type(codegen.EmptyInterfaceType{})
-		var err error
-		_, ok := (*t.AdditionalProperties).(bool)
-		if !ok && t.AdditionalProperties != nil {
-			casted := (*t.AdditionalProperties).(*schemas.Type)
-			valueType, err = g.generateType(casted, nil); 
-			if err != nil {
-				return nil, err
+
+		if t.AdditionalProperties != nil {
+			switch (*t.AdditionalProperties).(type) {
+			case map[string]interface{}:
+				jsonData, err := json.Marshal(t.AdditionalProperties)
+				if err != nil {
+					return nil, err
+				}
+				casted := &schemas.Type{}
+				err = json.Unmarshal(jsonData, &casted)
+				if err != nil {
+					return nil, err
+				}
+				valueType, err = g.generateType(casted, nil)
+				if err != nil {
+					return nil, err
+				}
+			case bool:
+				break
+			default:
+				return nil, errors.Errorf("unknown type of field additionalProperties: %T", t.AdditionalProperties)
 			}
 		}
 		return &codegen.MapType{
